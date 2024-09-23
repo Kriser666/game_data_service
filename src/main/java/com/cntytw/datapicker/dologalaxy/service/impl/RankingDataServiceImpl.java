@@ -1,7 +1,7 @@
 package com.cntytw.datapicker.dologalaxy.service.impl;
 
 import com.cntytw.datapicker.dologalaxy.dto.UserRankingDto;
-import com.cntytw.datapicker.dologalaxy.dto.UserRankingNeededDto;
+import com.cntytw.datapicker.dologalaxy.vo.UserRankingNeeded;
 import com.cntytw.datapicker.dologalaxy.mapper.GameDataRankingMapper;
 import com.cntytw.datapicker.dologalaxy.service.RankingDataService;
 import jakarta.annotation.Resource;
@@ -21,7 +21,7 @@ public class RankingDataServiceImpl implements RankingDataService {
      * @apiNote 排行榜前多少名的数据
      */
     @Override
-    public UserRankingNeededDto getUserRankingListTopN(String userMac, Integer count) {
+    public UserRankingNeeded getUserRankingListTopN(String userMac, Integer count) {
 
         List<UserRankingDto> userRankingListTopN;
         UserRankingDto userRankingDtoByMac = null;
@@ -51,10 +51,10 @@ public class RankingDataServiceImpl implements RankingDataService {
                 }
             }
 
-            UserRankingNeededDto userRankingNeededDto = new UserRankingNeededDto();
-            userRankingNeededDto.setUserRankingListTopN(userRankingListTopN);
-            userRankingNeededDto.setUserRankingDtoByMac(userRankingDtoByMac);
-            return userRankingNeededDto;
+            UserRankingNeeded userRankingNeeded = new UserRankingNeeded();
+            userRankingNeeded.setUserRankingListTopN(userRankingListTopN);
+            userRankingNeeded.setUserRankingDtoByMac(userRankingDtoByMac);
+            return userRankingNeeded;
         }catch (Exception e){
             log.error("getUserRankingListTopN 出错:{}",e.getMessage(), e.fillInStackTrace());
             throw new RuntimeException(e);

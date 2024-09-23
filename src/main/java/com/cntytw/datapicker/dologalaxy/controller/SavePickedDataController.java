@@ -1,5 +1,6 @@
 package com.cntytw.datapicker.dologalaxy.controller;
 
+import com.cntytw.datapicker.common.vo.CustomResponseEntry;
 import com.cntytw.datapicker.dologalaxy.service.PickedDataService;
 import com.cntytw.datapicker.dologalaxy.vo.GameDataTotal;
 import jakarta.annotation.Resource;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.ZonedDateTime;
 
 /**
  * @apiNote 嘟噜一笔银河数据保存控制层交互
@@ -24,14 +27,23 @@ public class SavePickedDataController {
     private PickedDataService pickedDataService;
 
     @PostMapping("/saveorupdate")
-    public ResponseEntity<String> trackEvent(@RequestBody GameDataTotal gameDataTotal) {
+    public ResponseEntity<CustomResponseEntry<String>>
+    trackEvent(@RequestBody GameDataTotal gameDataTotal) {
         log.debug("参数为：\n{}", gameDataTotal.toString());
+        CustomResponseEntry<String> customResponseEntry =
+                new CustomResponseEntry<>(200, HttpStatus.OK, "正常", ZonedDateTime.now(), null);
         try {
             pickedDataService.saveTrackData(gameDataTotal);
+            customResponseEntry.setMessage("操作成功");
+            customResponseEntry.setData("操作成功");
         }
         catch (Exception e) {
-            return new ResponseEntity<>("数据保存失败，请联系管理员：" + e.getClass().getName(), HttpStatus.INTERNAL_SERVER_ERROR);
+            log.error(e.getMessage());
+            customResponseEntry.setCode(500);
+            customResponseEntry.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+            customResponseEntry.setMessage(e.getMessage());
+            return new ResponseEntity<>(customResponseEntry, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("数据保存成功", HttpStatus.OK);
+        return new ResponseEntity<>(customResponseEntry, HttpStatus.OK);
     }
 }

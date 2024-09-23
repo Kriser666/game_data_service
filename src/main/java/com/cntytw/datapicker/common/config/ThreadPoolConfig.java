@@ -1,4 +1,4 @@
-package com.cntytw.datapicker.dologalaxy.config;
+package com.cntytw.datapicker.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

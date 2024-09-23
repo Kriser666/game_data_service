@@ -1,6 +1,7 @@
-package com.cntytw.datapicker.dologalaxy.dto;
+package com.cntytw.datapicker.dologalaxy.vo;
 
-import com.cntytw.datapicker.tools.FieldDescription;
+import com.cntytw.datapicker.dologalaxy.dto.UserRankingDto;
+import com.cntytw.datapicker.common.tools.FieldDescription;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class UserRankingNeededDto implements Serializable {
+public class UserRankingNeeded implements Serializable {
     @Serial
     private static final long serialVersionUID = -1840831686851699943L;
     @JsonProperty("userRankingDtoByMac")

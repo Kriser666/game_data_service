@@ -1,4 +1,4 @@
-package com.cntytw.datapicker.dologalaxy.config;
+package com.cntytw.datapicker.common.config;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
