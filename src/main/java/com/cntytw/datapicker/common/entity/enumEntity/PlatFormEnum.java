@@ -1,4 +1,4 @@
-package com.cntytw.datapicker.dologalaxy.entity.enumEntity;
+package com.cntytw.datapicker.common.entity.enumEntity;
 
 /**
  * 各个平台的枚举

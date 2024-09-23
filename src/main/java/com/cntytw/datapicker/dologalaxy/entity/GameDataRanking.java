@@ -2,7 +2,7 @@ package com.cntytw.datapicker.dologalaxy.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.cntytw.datapicker.tools.FieldDescription;
+import com.cntytw.datapicker.common.tools.FieldDescription;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;

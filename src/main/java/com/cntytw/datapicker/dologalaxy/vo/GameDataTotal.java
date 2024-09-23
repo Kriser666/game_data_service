@@ -2,7 +2,7 @@ package com.cntytw.datapicker.dologalaxy.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.cntytw.datapicker.dologalaxy.entity.*;
-import com.cntytw.datapicker.tools.FieldDescription;
+import com.cntytw.datapicker.common.tools.FieldDescription;
 import lombok.Data;
 
 /**

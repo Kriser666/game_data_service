@@ -79,6 +79,12 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- 违禁词检测，开源项目 -->
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>sensitive-word</artifactId>
+            <version>0.21.0</version>
+        </dependency>
 
     </dependencies>
 
