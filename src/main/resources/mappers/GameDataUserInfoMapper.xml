@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cntytw.datapicker.dologalaxy.mapper.GameDataUserInfoMapper">
+
+    <resultMap id="userInfo" type="com.cntytw.datapicker.dologalaxy.entity.GameDataUserInfo">
+        <id column="user_info_pk_id" property="userInfoPkId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="user_mac" property="userMac" jdbcType="VARCHAR"/>
+        <result column="user_nick" property="userNick" jdbcType="VARCHAR"/>
+        <result column="creation_date" property="creationDate" jdbcType="TIMESTAMP"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectByMac" parameterType="java.lang.String" resultMap="userInfo">
+        select user_info_pk_id,
+        user_mac,
+        user_nick,
+        creation_date,
+        last_update_date
+        from dolo_galaxy_game_user_info dggui
+        where 1=1
+        <if test="userMac != null and userMac != ''">
+            and dggui.user_mac = #{userMac}
+        </if>
+        limit 1
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Integer">
+        select MAX(dggui.user_info_pk_id)
+        from dolo_galaxy_game_user_info dggui
+    </select>
+
+</mapper>

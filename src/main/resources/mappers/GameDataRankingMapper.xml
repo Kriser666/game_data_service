@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cntytw.datapicker.dologalaxy.mapper.GameDataRankingMapper">
+
+    <select id="getUserRankingListTopN" parameterType="java.lang.Integer"
+            resultType="com.cntytw.datapicker.dologalaxy.dto.UserRankingDto">
+        select dggui.user_mac,
+               dggui.user_nick,
+               dggr.user_score,
+               0 as user_rank
+        from dolo_galaxy_game_ranking dggr
+                 left join `game-data-picker`.dolo_galaxy_game_user_info dggui
+                           on dggui.user_info_pk_id = dggr.user_info_pk_id
+        order by dggr.user_score desc, dggui.user_nick
+        limit #{count};
+    </select>
+    <select id="getUserRankingByMac" parameterType="java.lang.String"
+            resultType="com.cntytw.datapicker.dologalaxy.dto.UserRankingDto">
+        select dggui.user_mac,
+               dggui.user_nick,
+               rs.user_score,
+               rs.user_rank
+        from (select user_info_pk_id,
+                     user_score,
+                     DENSE_RANK() over (order by user_score desc) as user_rank
+              from dolo_galaxy_game_ranking) as rs
+                 left join (select user_info_pk_id, user_mac, user_nick
+                            from `game-data-picker`.dolo_galaxy_game_user_info
+                            order by user_nick) dggui
+                           on dggui.user_info_pk_id = rs.user_info_pk_id
+        where dggui.user_mac = #{userMac}
+        limit 1;
+    </select>
+
+</mapper>
